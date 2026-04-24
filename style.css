@@ -1,0 +1,676 @@
+/* ============================================================
+   style.css — Nathan Gillespie Personal Website Stylesheet
+   ============================================================
+   Color palette (chosen to avoid UT Knoxville orange/white
+   and Missouri S&T green/gold/silver):
+     --primary:    #4A1028  (deep burgundy/wine)
+     --accent:     #B8883A  (antique gold — links, highlights)
+     --bg:         #FAF8F5  (warm cream page background)
+     --surface:    #FFFFFF  (card / section backgrounds)
+     --text:       #2A1A1E  (dark wine-tinted charcoal for body copy)
+     --muted:      #8A737A  (secondary / caption text)
+     --border:     #E8D9CC  (warm parchment dividers)
+   ============================================================ */
+
+/* ---------- CSS Custom Properties (variables) ---------- */
+:root {
+  --primary:   #4A1028;
+  --accent:    #B8883A;
+  --accent-dk: #8F6420;   /* darker accent for hover states  */
+  --bg:        #FAF8F5;
+  --surface:   #FFFFFF;
+  --text:      #2A1A1E;
+  --muted:     #8A737A;
+  --border:    #E8D9CC;
+  --radius:    6px;
+  --shadow:    0 2px 12px rgba(74, 16, 40, 0.08);
+  --transition: 0.2s ease;
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Smooth scrolling when nav links are clicked */
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ---------- Typography ---------- */
+h1, h2, h3, h4 {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  color: var(--primary);
+  line-height: 1.25;
+}
+
+h1 { font-size: 2.4rem; }
+h2 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+h3 { font-size: 1.2rem; margin-bottom: 0.25rem; }
+
+p { margin-bottom: 1rem; }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+a:hover { color: var(--accent-dk); text-decoration: underline; }
+
+ul { list-style: none; }
+
+/* ---------- Scroll Offset for Sticky Navbar ---------- */
+/*
+   The sticky navbar is 60px tall. Without this, clicking a nav link
+   scrolls the section heading directly under — or behind — the navbar.
+   scroll-margin-top pushes the scroll destination down by the navbar height
+   so the heading always appears just below the bar, not hidden behind it.
+*/
+section[id],
+header[id] {
+  scroll-margin-top: 68px; /* 60px navbar + 8px breathing room */
+}
+
+/* ---------- Layout Utilities ---------- */
+.container {
+  /* Centers content and constrains max width */
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+/* Alternating section background for visual rhythm */
+.section--alt {
+  background-color: var(--surface);
+}
+
+.section__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border);
+}
+
+/* Small decorative bar before section titles */
+.section__header::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 1.75rem;
+  background: var(--accent);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ---------- Navigation Bar ---------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+/* Site name / logo text in the nav */
+.navbar__brand {
+  color: #FFFFFF;
+  font-family: 'Georgia', serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.navbar__brand:hover { color: var(--accent); text-decoration: none; }
+
+/* Nav link list */
+.navbar__links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar__links a {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color var(--transition);
+}
+.navbar__links a:hover { color: #FFFFFF; text-decoration: none; }
+
+/* Hamburger button — hidden on desktop, shown on mobile */
+.navbar__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.navbar__toggle span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* ---------- Hero / Header Section ---------- */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, #2E0818 100%);
+  color: #FFFFFF;
+  padding: 5rem 0 4rem;
+}
+
+.hero__inner {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* Circular profile photo container */
+.hero__photo-wrapper {
+  flex-shrink: 0;
+}
+
+.hero__photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255,255,255,0.3);
+  background-color: rgba(255,255,255,0.1);
+  /* Placeholder styling — remove when a real photo is used */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* Text content next to the photo */
+.hero__text h1 {
+  color: #FFFFFF;
+  margin-bottom: 0.4rem;
+}
+
+.hero__subtitle {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 0.25rem;
+}
+
+.hero__affiliation {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 1.5rem;
+}
+
+/* Social / external icon buttons in hero */
+.hero__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* ---------- Buttons ---------- */
+/* Primary filled button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+  text-decoration: none;
+}
+
+/* White solid button (used on dark hero background) */
+.btn--white {
+  background: #FFFFFF;
+  color: var(--primary);
+}
+.btn--white:hover { background: var(--bg); text-decoration: none; color: var(--primary); }
+
+/* Outlined / ghost button */
+.btn--outline-white {
+  background: transparent;
+  color: #FFFFFF;
+  border-color: rgba(255,255,255,0.6);
+}
+.btn--outline-white:hover {
+  background: rgba(255,255,255,0.15);
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+/* Standard accent button (used on light backgrounds) */
+.btn--accent {
+  background: var(--accent);
+  color: #FFFFFF;
+}
+.btn--accent:hover { background: var(--accent-dk); text-decoration: none; color: #fff; }
+
+/* Outlined accent button */
+.btn--outline {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.btn--outline:hover { background: var(--accent); color: #fff; text-decoration: none; }
+
+/* ---------- About Section ---------- */
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.about__bio p:last-child { margin-bottom: 0; }
+
+/* Research interests tag list */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* ---------- Education Section ---------- */
+.education__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Card-style education entry */
+.edu-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+/* Left accent stripe on the card */
+.edu-card__stripe {
+  width: 4px;
+  min-height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.edu-card__degree {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--primary);
+}
+
+.edu-card__institution {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.15rem;
+}
+
+.edu-card__year {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ---------- Publications Section ---------- */
+.pub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pub-item {
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  transition: border-color var(--transition);
+}
+.pub-item:hover { border-color: var(--accent); }
+
+.pub-item__title {
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
+}
+
+.pub-item__authors {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-bottom: 0.2rem;
+}
+
+/* Italicize the journal / venue name */
+.pub-item__venue {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.pub-item__links {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Small pill links (DOI, PDF, etc.) */
+.pub-link {
+  font-size: 0.78rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 99px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  transition: background var(--transition), color var(--transition);
+}
+.pub-link:hover { background: var(--accent); color: #fff; text-decoration: none; }
+
+/* Scholar link at bottom of publications */
+.pub-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+/* ---------- CV / Resume Section ---------- */
+.documents__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.doc-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.doc-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(184,136,58,0.12);
+}
+
+/* Large icon above document title */
+.doc-card__icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.doc-card h3 { margin-bottom: 0.5rem; }
+.doc-card p  { font-size: 0.875rem; color: var(--muted); margin-bottom: 1.25rem; }
+
+/* ---------- Photo Gallery ---------- */
+.gallery__grid {
+  display: grid;
+  /* 3 equal columns; each photo keeps a 4:3 aspect ratio */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.gallery__item {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--border);
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+}
+
+/* Actual image (when you replace the placeholder) */
+.gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.gallery__item:hover img { transform: scale(1.04); }
+
+/* Placeholder shown when no image is provided */
+.gallery__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  text-align: center;
+  padding: 1rem;
+}
+.gallery__placeholder-icon { font-size: 2rem; }
+
+/* Optional caption overlaid at the bottom of a photo */
+.gallery__caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.55));
+  color: #fff;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.gallery__item:hover .gallery__caption { opacity: 1; }
+
+/* ---------- Contact Section ---------- */
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.contact__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Individual contact row (icon + text) */
+.contact__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.contact__icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  color: var(--accent);
+}
+
+.contact__label {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 0.1rem;
+}
+
+.contact__value {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+/* Simple contact form styling */
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Text inputs and textarea */
+.form-group input,
+.form-group textarea {
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(184,136,58,0.15);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  background: var(--primary);
+  color: rgba(255,255,255,0.7);
+  padding: 2rem 0;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.footer a {
+  color: rgba(255,255,255,0.85);
+}
+.footer a:hover { color: #fff; }
+
+/* ---------- Utility Classes ---------- */
+.text-muted  { color: var(--muted); }
+.text-center { text-align: center; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+
+/* ---------- Responsive Breakpoints ---------- */
+
+/* Tablet (≤ 768px) */
+@media (max-width: 768px) {
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.45rem; }
+
+  /* Stack hero photo and text vertically */
+  .hero__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero__links { justify-content: center; }
+
+  /* Stack about columns */
+  .about__grid       { grid-template-columns: 1fr; }
+
+  /* Stack document download cards */
+  .documents__grid   { grid-template-columns: 1fr; }
+
+  /* 2-column gallery on tablet */
+  .gallery__grid     { grid-template-columns: repeat(2, 1fr); }
+
+  /* Stack contact columns */
+  .contact__grid     { grid-template-columns: 1fr; }
+
+  /* Show hamburger menu, hide link list */
+  .navbar__toggle    { display: flex; }
+  .navbar__links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--primary);
+    padding: 1rem 1.5rem;
+    gap: 1rem;
+  }
+  /* JS toggles this class to open/close mobile menu */
+  .navbar__links.open { display: flex; }
+}
+
+/* Mobile (≤ 480px) */
+@media (max-width: 480px) {
+  .gallery__grid { grid-template-columns: 1fr; }
+  .hero__photo   { width: 130px; height: 130px; }
+  .section       { padding: 2.5rem 0; }
+}
+
+/* Makes all gallery images the same size and crop neatly */
+.gallery__item img {
+  width: 100%;           /* fills the grid cell horizontally */
+  height: 250px;         /* fixed height — adjust this number to taste */
+  object-fit: cover;     /* crops the image to fit without stretching */
+  object-position: center; /* crops from the center of the image */
+  display: block;
+  border-radius: 6px;    /* optional — matches rounded placeholder style */
+}

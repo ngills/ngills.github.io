@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================================
+       index.html — Nathan Gillespie Personal Website
+       ============================================================
+       Structure overview:
+         1. <head>       — meta, title, font import, stylesheet
+         2. <nav>        — sticky top navigation bar
+         3. #hero        — name, title, photo, quick links
+         4. #about       — bio paragraph + research interests
+         5. #education   — degree cards
+         6. #publications— list of papers with DOI / PDF links
+         7. #documents   — CV and resume download cards
+         8. #photos      — photo gallery (placeholders included)
+         9. #contact     — contact info + message form
+        10. <footer>     — copyright, quick links
+       ============================================================ -->
+
+  <meta charset="UTF-8" />
+  <!-- Responsive viewport: makes layout scale correctly on phones/tablets -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Page title that appears in browser tabs and search results -->
+  <title>Nathan Gillespie | Materials Science &amp; Engineering</title>
+
+  <!-- SEO / social preview meta tags -->
+  <meta name="description"
+        content="Personal academic website of Nathan Gillespie, PhD Candidate and
+                 Graduate Research Assistant in Materials Science
+                 and Engineering at the University of Tennessee, Knoxville." />
+  <meta name="author" content="Nathan Gillespie" />
+
+  <!-- Open Graph tags — controls how links preview on LinkedIn, Slack, etc.
+       Update og:image to point to a real headshot when available. -->
+  <meta property="og:title"       content="Nathan Gillespie | Materials Scientist" />
+  <meta property="og:description" content="Graduate Research Assistant, UTK" />
+  <meta property="og:type"        content="website" />
+
+  <!-- Google Fonts: Inter (sans-serif body) loaded via CDN.
+       If you prefer no external dependencies, remove this link and
+       the font-family in style.css falls back to system fonts. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet" />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+       ============================================================
+       Sticky bar at the top of every scroll position.
+       Links use anchor IDs to jump to sections below.
+       The hamburger (#navToggle) is shown only on mobile (CSS media query).
+       script.js handles the toggle behavior.
+       ============================================================ -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container navbar__inner">
+
+      <!-- Brand / site name — clicking it returns to the top of the page -->
+      <a class="navbar__brand" href="#hero">Nathan Gillespie</a>
+
+      <!-- Desktop navigation links
+           To ADD a section: duplicate a link and change href + text.
+           To REMOVE a section: delete the <a> tag. -->
+      <ul class="navbar__links" id="navLinks" role="list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#documents">CV / Resume</a></li>
+        <li><a href="#photos">Photos</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- Hamburger button (mobile only) — script.js toggles .open on navLinks -->
+      <button class="navbar__toggle" id="navToggle"
+              aria-controls="navLinks" aria-expanded="false"
+              aria-label="Open navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </nav>
+
+
+  <!-- ============================================================
+       HERO SECTION
+       ============================================================
+       Large banner at the top with name, title, and quick-access
+       buttons (Google Scholar, LinkedIn, CV, Contact).
+       ============================================================ -->
+  <header class="hero" id="hero">
+    <div class="container">
+      <div class="hero__inner">
+
+        <!-- ---- Profile Photo ----
+             Replace the <div class="hero__photo"> with an <img> tag
+             once you have a photo:
+               <img src="images/headshot.jpg"
+                    alt="Nathan Gillespie"
+                    class="hero__photo" />
+             Until then the placeholder div below is displayed. -->
+        <div class="hero__photo-wrapper">
+          <img src="images/headshot.jpg"
+          alt="Nathan Gillespie"
+          class="hero__photo" />
+            <!-- Placeholder icon (person silhouette using text art) -->
+            <!--  <span style="font-size:5rem; line-height:1;">👤</span>
+          </div>
+        </div>
+
+        <!-- ---- Text content ---- -->
+        <div class="hero__text">
+          <!-- *** EDIT: Your name *** -->
+          <h1>Nathan Gillespie</h1>
+
+          <!-- *** EDIT: Your current title / role *** -->
+          <p class="hero__subtitle">PhD Candidate and Graduate Research Assistant</p>
+
+          <!-- *** EDIT: Your department and university *** -->
+          <p class="hero__affiliation">
+            Department of Materials Science &amp; Engineering<br />
+            University of Tennessee, Knoxville
+          </p>
+
+          <!-- Quick-access external profile links and navigation shortcuts.
+               *** EDIT: Replace # in href with your real profile URLs *** -->
+          <div class="hero__links">
+
+            <!-- Google Scholar — replace # with your Scholar profile URL -->
+            <a class="btn btn--white"
+               href="https://scholar.google.com/citations?user=CwYy_fAAAAAJ&hl=en"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Google Scholar profile">
+              <!-- Simple inline SVG book icon -->
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+              Google Scholar
+            </a>
+
+            <!-- LinkedIn — replace # with your LinkedIn profile URL -->
+            <a class="btn btn--outline-white"
+               href="https://www.linkedin.com/in/nathan-gillespie-5191321ab/"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="LinkedIn profile">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2
+                         2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+              LinkedIn
+            </a>
+
+            <!-- Jump to CV/Resume section -->
+            <a class="btn btn--outline-white" href="#documents">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12
+                         a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
+              CV / Resume
+            </a>
+
+            <!-- Jump to contact section -->
+            <a class="btn btn--outline-white" href="#contact">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2
+                         2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              Contact
+            </a>
+
+          </div><!-- end hero__links -->
+        </div><!-- end hero__text -->
+
+      </div><!-- end hero__inner -->
+    </div><!-- end container -->
+  </header>
+
+
+  <!-- ============================================================
+       ABOUT SECTION
+       ============================================================
+       Left column: bio / research blurb.
+       Right column: research interests as tags.
+       *** EDIT everything inside the about__bio <p> tags ***
+       ============================================================ -->
+  <section class="section section--alt" id="about">
+    <div class="container">
+
+      <div class="section__header">
+        <h2>About</h2>
+      </div>
+
+      <div class="about__grid">
+
+        <!-- Bio paragraph(s) -->
+        <div class="about__bio">
+          <!-- *** EDIT: Replace with your actual bio *** -->
+          <p>
+            I am a PhD student working on the discovery and development of new scintilllator materials in the Scintillation Materials Reserach Center at the University 
+            of Tennessee, Knoxville. My specific area of study is multi-componet garnet ceramics.
+          </p>
+          <p>
+            My favorite part of my work is the sense of accomplishment and true understanding that comes from working genuinely hard on something. I'm amazed by the complexity of
+            the world I get to live in and I want to learn a little more about it every day.
+            </p>
+            I have a master's degree in Materials Science and Engineering from the University of Tennessee and a Bachelor's of Science from Missouri University of Science and Technology.
+            My PhD advisor is Dr. Mariya Zhuravleva, and I was an undergraduate research assistant for Dr. Gregory Hilmas at Missouri University of Science and Technology and
+             Dr. Ambreen Nisar at Florida International University.
+            </p>
+         
+        </div>
+
+        <!-- Research interests tags -->
+        <!--<div class="about__interests">
+          <h3>Research Interests</h3>
+          <p class="text-muted" style="font-size:0.875rem;">-->
+            <!-- *** EDIT: brief one-line description *** -->
+            <!--Key topics and themes in my research:
+          </p>-->
+
+          <!-- *** EDIT: Add / remove / rename tags to match your interests ***
+               Each tag is just a <span class="tag">label</span> -->
+          <!--<div class="tag-list">
+            <span class="tag">Ceramic Processing </span>
+            <span class="tag">Microstructure Characterization</span>
+            <span class="tag">Electron Microscopy</span>
+            <span class="tag">X-ray Diffraction</span>
+            <span class="tag">Phase Equilibria</span>
+            <span class="tag">Scintillation</span>
+            <span class="tag">Radiation Detection</span>
+             <span class="tag"></span>-->
+            <!-- Add more tags here as needed -->
+          </div>
+        </div>
+
+      </div><!-- end about__grid -->
+    </div><!-- end container -->
+  </section>
+
+
+  <!-- ============================================================
+       EDUCATION SECTION
+       ============================================================
+       One .edu-card per degree. Add/remove cards as needed.
+       ============================================================ -->
+  <section class="section" id="education">
+    <div class="container">
+
+      <div class="section__header">
+        <h2>Education</h2>
+      </div>
+
+      <div class="education__list">
+
+        <!-- ---- Master's Degree ---- -->
+        <div class="edu-card">
+          <div class="edu-card__stripe"></div>
+          <div>
+            <!-- *** EDIT: degree name, field, institution, dates *** -->
+            <div class="edu-card__degree">
+              M.S. in Materials Science &amp; Engineering
+            </div>
+            <div class="edu-card__institution">
+              University of Tennessee, Knoxville — Knoxville, TN
+            </div>
+            <div class="edu-card__year">
+              <!-- *** EDIT: graduation year or "Expected [Year]" *** -->
+              2024
+            </div>
+                        </p>
+            <!-- *** EDIT (optional): advisor name *** -->
+            <p class="text-muted" style="font-size:0.875rem;">
+              Committee: Dr. Mariya Zhuraleva (chair, advisor), Dr. Chuck Melcher, Dr. Katharine Page
+            </p>
+          </div>
+        </div>
+
+        <!-- ---- Bachelor's Degree ---- -->
+        <div class="edu-card">
+          <div class="edu-card__stripe"></div>
+          <div>
+            <div class="edu-card__degree">
+              B.S. in Ceramic Engineering
+            </div>
+            <div class="edu-card__institution">
+              Missouri University of Science and Technology — Rolla, MO
+            </div>
+            <div class="edu-card__year">
+              <!-- *** EDIT: your graduation year *** -->
+              2022
+            </div>
+            <!-- *** EDIT (optional): any honors, minors, or relevant notes *** -->
+            <p class="text-muted mt-1" style="font-size:0.875rem;">
+              Magna cum laude, 
+              Minor: French
+            </p>
+          </div>
+        </div>
+
+        <!-- To add another degree (e.g., a second B.S. or Ph.D.),
+             copy the block above and fill in the details. -->
+
+      </div><!-- end education__list -->
+    </div><!-- end container -->
+  </section>
+
+
+  <!-- ============================================================
+       PUBLICATIONS SECTION
+       ============================================================
+       Each .pub-item is one paper.  Fill in authors, title, venue,
+       year, and add DOI / PDF links as available.
+       At the bottom there is a "View all on Google Scholar" button.
+       ============================================================ -->
+  <section class="section section--alt" id="publications">
+    <div class="container">
+
+      <div class="section__header">
+        <h2>Selected Publications</h2>
+      </div>
+
+      <div class="pub-list">
+
+        <!-- ---- Publication 1 ---- -->
+        <!-- *** EDIT: Replace all placeholder text with real publication data *** -->
+        <div class="pub-item">
+          <div class="pub-item__title">
+            Tb-rich multi-component garnet ceramic scintillators for high-energy X-ray radiography
+          </div>
+          <div class="pub-item__authors">
+            <!-- Convention: bold your name, separate authors with commas -->
+            <strong>N. Gillespie</strong>, K. Anderson, R. Lalk, M. Harpel, L. Stand, C. Melcher, J. Glodo, M. Müller, G. Adhikari, S. Drewry, K. Page, M. Zhuravleva
+          </div>
+          <div class="pub-item__venue">
+            Optical Materials,  Vol 175, 2026
+          </div>
+          <div class="pub-item__links">
+            <!-- *** EDIT: replace # with the real DOI URL *** -->
+            <a class="pub-link" href="https://doi.org/10.1016/j.optmat.2026.118038" target="_blank" rel="noopener">Link</a>
+            <!-- *** EDIT: link to a PDF if available *** -->
+            <!-- <a class="pub-link" href="#" target="_blank" rel="noopener">PDF</a> -->
+          </div>
+        </div>
+
+        <!-- ---- Publication 2 ---- -->
+        <div class="pub-item">
+          <div class="pub-item__title">
+            Exploring high-entropy desisn in rare-earth aluminum garnet scintillators
+          </div>
+          <div class="pub-item__authors">
+            K. Anderson, <strong>N. Gillespie</strong>, M. Müller, J. Glodo, Y. Wang, L. Stand, C. Melcher, M. Zhuravleva
+          </div>
+          <div class="pub-item__venue">
+            2024 IEEE Nuclear Science Symposium (NSS), 2022
+          </div>
+          <div class="pub-item__links">
+            <a class="pub-link" href="https://doi.org/10.1109/NSS/MIC/RTSD57108.2024.10657843" target="_blank" rel="noopener">Link</a>
+          </div>
+        </div>
+
+        <!-- ---- Publication 3 ---- -->
+        <!-- <div class="pub-item">
+          <div class="pub-item__title">
+            [Publication Title Goes Here]
+          </div>
+          <div class="pub-item__authors">
+            [Co-Author A], <strong>N. Gillespie</strong>, [Co-Author B]
+          </div>
+          <div class="pub-item__venue">
+            [Conference Proceedings / Journal], [Year]
+          </div>
+          <div class="pub-item__links">
+            <a class="pub-link" href="#" target="_blank" rel="noopener">DOI</a>
+            <a class="pub-link" href="#" target="_blank" rel="noopener">PDF</a>
+          </div>
+        </div> -->
+
+        <!-- To add more publications:
+             1. Copy one of the .pub-item blocks above.
+             2. Paste it below the last pub-item.
+             3. Fill in the new paper's details.
+             Publications are displayed newest-first by convention. -->
+
+      </div><!-- end pub-list -->
+
+      <!-- Link to full Google Scholar profile -->
+      <div class="pub-footer">
+        <a class="btn btn--outline"
+           href="https://scholar.google.com/citations?user=CwYy_fAAAAAJ&hl=en"
+           target="_blank"
+           rel="noopener noreferrer">
+          <!-- *** EDIT: replace # with your Google Scholar profile URL *** -->
+          View All Publications on Google Scholar &rarr;
+        </a>
+      </div>
+
+    </div><!-- end container -->
+  </section>
+
+
+  <!-- ============================================================
+       CV / RESUME SECTION
+       ============================================================
+       Two download cards: full CV and one-page resume.
+       Place your PDF files in the root folder (or a subfolder)
+       and update the href on each button.
+       ============================================================ -->
+  <section class="section" id="documents">
+    <div class="container">
+
+      <div class="section__header">
+        <h2>CV &amp; Resume</h2>
+      </div>
+
+      <div class="documents__grid">
+
+        <!-- ---- Curriculum Vitae card ---- -->
+        <div class="doc-card">
+          <!-- Document icon (file with lines) -->
+          <div class="doc-card__icon">📄</div>
+          <h3>Curriculum Vitae</h3>
+          <p>
+            Full academic CV including education, research experience,
+            publications, presentations, and awards.
+          </p>
+          <!-- *** EDIT: Update href to the actual CV PDF path, e.g. "files/gillespie_cv.pdf" *** -->
+          <a class="btn btn--accent" href="files\cv_nathan_gillespie_april_2026.pdf" download>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download CV (PDF)
+          </a>
+        </div>
+
+        <!-- ---- Resume card ---- -->
+        <div class="doc-card">
+          <div class="doc-card__icon">📋</div>
+          <h3>Resume</h3>
+          <p>
+            One-page resume tailored for industry and
+            national laboratory positions.
+          </p>
+          <!-- *** EDIT: Update href to the actual resume PDF path *** -->
+          <a class="btn btn--outline" href="files\phd_year_4_resume_nathan_gillespie.pdf" download>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download Resume (PDF)
+          </a>
+        </div>
+
+      </div><!-- end documents__grid -->
+
+      <!-- Optional note about document dates -->
+      <p class="text-muted text-center mt-2" style="font-size:0.82rem;">
+        <!-- *** EDIT: update the month/year whenever you upload a new version *** -->
+        Last updated: April 2026
+      </p>
+
+    </div><!-- end container -->
+  </section>
+
+
+  <!-- ============================================================
+       PHOTO GALLERY SECTION
+       ============================================================
+       Currently shows placeholder boxes.
+       To replace a placeholder with a real photo:
+         1. Add your image file to an "images/" subfolder.
+         2. Replace the <div class="gallery__placeholder"> with:
+              <img src="images/your-photo.jpg" alt="Description" />
+         3. Optionally add a caption:
+              <div class="gallery__caption">Your caption here</div>
+       ============================================================ -->
+  <section class="section section--alt" id="photos">
+    <div class="container">
+
+      <div class="section__header">
+        <h2>Photos</h2>
+      </div>
+
+      <div class="gallery__grid">
+
+        <!-- ---- Photo 1 ---- -->
+        <div class="gallery__item">
+          <!-- *** REPLACE with: <img src="images/photo1.jpg" alt="Description"> *** -->
+          <img src="images/group_photo.jpg" alt="Group photo of the SMRC" />
+          </div>
+          <!-- Optional caption — shown on hover when a real image is present -->
+          <!-- <div class="gallery__caption">Caption for photo 1</div> -->
+
+        <!-- ---- Photo 2 ---- -->
+        <div class="gallery__item">
+          <img src="images/linac.jpg" alt="Doing radiation hardness experiments with a linac" />
+          </div>
+
+        <!-- ---- Photo 3 ---- -->
+        <div class="gallery__item">
+          <img src="images/caari_sneap.jpg" alt="Presenting at CAARI-SNEAP 2024" />
+          </div>
+
+        <!-- ---- Photo 4 ---- -->
+        <div class="gallery__item">
+          <img src="images/demo.jpg" alt="Explaining MSE to incoming freshmen at UTK" />
+          </div>
+
+        <!-- ---- Photo 5 ---- -->
+        <div class="gallery__item">
+          <img src="images/poster_2.jpg" alt="Presenting at a Student Poster Night" />
+          </div>
+
+        <!-- ---- Photo 6 ---- -->
+        <div class="gallery__item">
+          <img src="images/lab.jpg" alt="Working in the lab" />
+          </div>
+
+        <!-- To add more photos: copy a .gallery__item block and paste it here.
+             The grid will automatically wrap to a new row. -->
+
+      </div><!-- end gallery__grid -->
+    </div><!-- end container -->
+  </section>
+
+
+  <!-- ============================================================
+       CONTACT SECTION
+       ============================================================
+       Left column: office address, email, social links.
+       Right column: a simple message form.
+
+       NOTE: The form does NOT send email by default.
+       See script.js for instructions on connecting it to a
+       backend or a service like Formspree.
+       ============================================================ -->
+  <section class="section" id="contact">
+    <div class="container">
+
+      <div class="section__header">
+        <h2>Contact</h2>
+      </div>
+
+      <div class="contact__grid">
+
+        <!-- ---- Contact Information ---- -->
+        <div class="contact__info">
+
+          <!-- Email -->
+          <div class="contact__row">
+            <span class="contact__icon" aria-hidden="true">✉️</span>
+            <div>
+              <span class="contact__label">Email</span>
+              <!-- *** EDIT: Replace with your actual email address *** -->
+              <span class="contact__value">
+                <a href="mailto:ngillesp@vols.utk.edu">ngillesp@vols.utk.edu</a>
+              </span>
+            </div>
+          </div>
+
+          <!-- Office / Lab Location -->
+          <div class="contact__row">
+            <span class="contact__icon" aria-hidden="true">📍</span>
+            <div>
+              <span class="contact__label">Office</span>
+              <!-- *** EDIT: Replace with your actual office/lab location *** -->
+              <span class="contact__value">
+                306 Ferris Hall  <br />
+                Department of Materials Science &amp; Engineering<br />
+                University of Tennessee, Knoxville<br />
+                Knoxville, TN 37996
+              </span>
+            </div>
+          </div>
+
+          <!--
+          Google Scholar link
+          <div class="contact__row">
+            <span class="contact__icon" aria-hidden="true">🎓</span>
+            <div>
+              <span class="contact__label">Google Scholar</span>
+              <span class="contact__value">
+                *** EDIT: Replace # with your Scholar URL ***
+                <a href="https://scholar.google.com/citations?user=CwYy_fAAAAAJ&hl=en" target="_blank" rel="noopener">
+                  See a full list of my publications
+                </a>
+              </span>
+            </div>
+          </div>
+            -->
+
+ 
+          <!--
+            LinkedIn link
+          <div class="contact__row">
+            <span class="contact__icon" aria-hidden="true">💼</span>
+            <div>
+              <span class="contact__label">LinkedIn</span>
+              <span class="contact__value">
+                *** EDIT: Replace # with your LinkedIn URL ***
+                <a href="https://www.linkedin.com/feed/" target="_blank" rel="noopener">
+                  Connect with me on LinkedIn
+                </a>
+              </span>
+            </div>
+          </div>
+        --> 
+        
+
+          <!-- Optional: ORCID iD — useful for academic credibility -->
+          <!--
+          <div class="contact__row">
+            <span class="contact__icon">🔬</span>
+            <div>
+              <span class="contact__label">ORCID</span>
+              <span class="contact__value">
+                <a href="https://orcid.org/0000-0000-0000-0000"
+                   target="_blank" rel="noopener">
+                  0000-0000-0000-0000
+                </a>
+              </span>
+            </div>
+          </div>
+          -->
+
+        </div><!-- end contact__info -->
+
+        <!-- ---- Contact Form ---- -->
+        <!-- To wire this up to receive real email messages:
+             1. Sign up at https://formspree.io (free tier available)
+             2. Create a form and copy your form ID
+             3. Change action="https://formspree.io/f/YOUR_ID" and method="POST"
+             4. Remove the JS preventDefault in script.js
+        -->
+        <!-- <form class="contact__form" id="contactForm" novalidate> -->
+
+          <!-- Sender's name -->
+          <!-- <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name"
+                   placeholder="Your full name" required />
+          </div> -->
+
+          <!-- Sender's email (so you can reply) -->
+          <!-- <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email"
+                   placeholder="your@email.com" required />
+          </div> -->
+
+          <!-- Subject line -->
+          <!-- <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject"
+                   placeholder="Brief subject" />
+          </div> -->
+
+          <!-- Message body -->
+         <!-- <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5"
+                      placeholder="Your message…" required></textarea>
+          </div> -->
+
+          <!-- Submit button -->
+          <!-- <button type="submit" class="btn btn--accent">
+            Send Message
+          </button> -->
+
+          <!-- Confirmation message injected by script.js after submit -->
+          <!-- <p id="formMessage" role="status" aria-live="polite"></p>
+
+        </form>
+
+      </div> end contact__grid -->
+    </div><!-- end container -->
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================
+       Keep it minimal: copyright + quick nav links.
+       The year is auto-updated by script.js.
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+
+      <!-- Copyright line — year is injected by script.js -->
+      <p>
+        &copy; <span id="year"></span> Nathan Gillespie.
+        All rights reserved.
+      </p>
+
+      <!-- Quick footer links -->
+      <!-- <p style="margin-top:0.5rem;">
+        <a href="#about">About</a> &nbsp;&middot;&nbsp;
+        <a href="#publications">Publications</a> &nbsp;&middot;&nbsp;
+        <a href="#documents">CV</a> &nbsp;&middot;&nbsp;
+        <a href="#contact">Contact</a>
+      </p> -->
+
+    </div>
+  </footer>
+
+
+  <!-- JavaScript loaded at the bottom of <body> so the DOM is ready
+       before script.js tries to query elements. -->
+  <script src="script.js"></script>
+
+</body>
+</html>
